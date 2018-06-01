@@ -32,26 +32,26 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const action = req.body
-
-  db
-    .insert(action)
-    .then(response => {
-      res.status(200).json(response)
-    })
-    .catch(error => {
-      res.status(500).json(console.error('Error updating action', error))
+  if (!action.description && !action.project_id) {
+    res.status(400).json({
+      error: 'description and project_id is Required!'
     });
-  // if (!action.description) {
-  //   res.status(400).json({
-  //     error: 'description is Required'
-  //   });
-  // } else if (action.description.length > 120) {
-  //   res.status(400).json({
-  //     error: 'The Max length is 120 characters'
-  //   });
-  // } else {
-  //   res.status(500).json(error);
-  // }
+  } else if (action.description.length > 120) {
+    res.status(400).json({
+      error: 'The Max length is 120 characters'
+    });
+  } else {
+    db
+      .insert(action)
+      .then(response => {
+        res.status(200).json(response)
+      })
+      .catch(error => {
+        res.status(500).json(console.error('Error updating action', error))
+      });
+  }
+
+
 });
 
 
