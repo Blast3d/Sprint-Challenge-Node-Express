@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
       res.status(200).json(action)
     })
     .catch(error => {
-      res.status(500).json(console.error('Error updating action', error))
+      res.status(404).json(console.error('not found', error))
     });
 });
 
@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
     });
   } else if (action.description.length > 128) {
     res.status(400).json({
-      error: 'The Max length for descrioption is 128 characters'
+      error: 'The Max length for description is 128 characters'
     });
   } else {
     db
@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
         res.status(200).json(response)
       })
       .catch(error => {
-        res.status(500).json(console.error('Error updating action', error))
+        res.status(500).json(console.error('Error creating action', error))
       });
   }
 
@@ -70,7 +70,7 @@ router.delete('/:id', (req, res) => {
       res.status(200).json(response)
     })
     .catch(error => {
-      res.status(500).json(console.error('Error updating action', error))
+      res.status(404).json(console.error('not found', error))
     });
 });
 
