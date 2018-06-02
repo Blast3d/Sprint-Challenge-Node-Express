@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res) => { // this was working? need to debug
   const action = req.body
   if (!action.description && !action.project_id) {
     res.status(400).json({
@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
         res.status(200).json(response)
       })
       .catch(error => {
-        res.status(500).json(console.error('Error creating action', error))
+        res.status(500).json(console.error('Error creating action', error)) // throwing this error debug?
       });
   }
 
