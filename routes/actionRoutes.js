@@ -36,9 +36,9 @@ router.post('/', (req, res) => {
     res.status(400).json({
       error: 'description and project_id is Required!'
     });
-  } else if (action.description.length > 120) {
+  } else if (action.description.length > 128) {
     res.status(400).json({
-      error: 'The Max length is 120 characters'
+      error: 'The Max length for descrioption is 128 characters'
     });
   } else {
     db
